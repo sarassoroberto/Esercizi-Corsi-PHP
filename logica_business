@@ -1,0 +1,170 @@
+
+## Logica di Business
+
+La **"logica di business"** in programmazione si riferisce alla parte del software che **implementa le regole, le operazioni e le logiche specifiche dell'attività** o del dominio per cui il software è stato creato. Questa parte del software è responsabile per l'elaborazione delle informazioni e per il raggiungimento degli obiettivi principali dell'applicazione.
+
+Ecco alcuni punti chiave relativi alla logica di business in programmazione:
+
+### Regole e Processi dell'Attività
+La logica di business traduce le regole e i processi dell'attività o del dominio in codice software. Queste regole possono essere molto diverse a seconda del contesto, ad esempio, nel **settore bancario**, la logica di business potrebbe includere regole per gestire **transazioni finanziarie, calcolare gli interessi o verificare l'autenticità delle transazioni**.
+
+### Validazione e Verifica dei Dati 
+La logica di business è responsabile della validazione e della verifica dei dati in ingresso per garantire che soddisfino i requisiti dell'applicazione e le regole del dominio. 
+Ad esempio, un sistema di prenotazione potrebbe verificare che le date delle prenotazioni siano valide e che i campi obbligatori siano stati compilati correttamente.
+
+### Processo di Business: 
+La logica di business implementa i flussi di lavoro e i processi aziendali nell'applicazione. Questi processi possono includere la gestione degli ordini, la gestione delle risorse umane, la produzione, la gestione delle scorte e così via.
+
+### Calcoli e Trasformazioni dei Dati: 
+La logica di business esegue calcoli e trasformazioni sui dati in ingresso per produrre i risultati desiderati. 
+Ad esempio, in un'applicazione di e-commerce, la logica di business potrebbe calcolare il totale dell'ordine, applicare sconti o calcolare le tasse di spedizione.
+
+### Interazione con il Database e Altri Sistemi: 
+La logica di business comunica con il database e altri sistemi esterni per ottenere, memorizzare e aggiornare i dati pertinenti per l'applicazione.
+
+In sintesi, la logica di business è il cuore dell'applicazione software, in quanto implementa le regole e i processi che definiscono l'attività o il dominio specifico dell'applicazione. Una buona progettazione della logica di business è cruciale per lo sviluppo di software robusto, flessibile e adatto alle esigenze del cliente.
+
+
+## Esempi di logica di Business
+
+Certamente, analizziamo e argomentiamo gli esempi di logica di business implementati in PHP:
+
+### Calcolare il Totale dell'Ordine:
+
+Questo esempio rappresenta un'operazione comune all'interno di un sistema di gestione degli ordini. La classe Ordine permette di aggiungere prodotti a un ordine e calcolare il totale sommando i prezzi dei singoli prodotti aggiunti.
+La logica di business qui consiste nell'effettuare operazioni di calcolo (somma dei prezzi dei prodotti) per ottenere un risultato (totale dell'ordine).
+
+```php
+class Ordine {
+    private $prodotti = [];
+
+    public function aggiungiProdotto($nomeProdotto, $prezzo) {
+        $this->prodotti[$nomeProdotto] = $prezzo;
+    }
+
+    public function calcolaTotale() {
+        $totale = 0;
+        foreach ($this->prodotti as $prezzo) {
+            $totale += $prezzo;
+        }
+        return $totale;
+    }
+}
+
+// Utilizzo
+$ordine = new Ordine();
+$ordine->aggiungiProdotto("Libro", 10);
+$ordine->aggiungiProdotto("Penna", 2);
+echo "Totale dell'ordine: $" . $ordine->calcolaTotale();
+
+```
+
+### Verificare l'Età di Accesso a un Sito Web:
+
+```php
+class VerificaEta {
+    public function verificaAccesso($eta) {
+        if ($eta >= 18) {
+            echo "Benvenuto! Hai accesso al contenuto per adulti.";
+        } else {
+            echo "Mi dispiace, devi avere almeno 18 anni per accedere al contenuto per adulti.";
+        }
+    }
+}
+
+// Utilizzo
+$verifica = new VerificaEta();
+$verifica->verificaAccesso(20); // Output: Benvenuto! Hai accesso al contenuto per adulti.
+
+```
+In questo esempio, la classe VerificaEta contiene un metodo per verificare se un utente ha l'età sufficiente per accedere a determinati contenuti.
+La logica di business qui consiste nell'applicare una regola di controllo sull'età dell'utente e restituire un messaggio appropriato a seconda della sua età.
+Gestione delle Transazioni Bancarie:
+
+```php
+class TransazioneBancaria {
+    private $saldo = 1000;
+
+    public function effettuaPrelievo($importo) {
+        if ($this->saldo >= $importo) {
+            $this->saldo -= $importo;
+            echo "Prelievo di $importo effettuato con successo. Saldo rimanente: $this->saldo";
+        } else {
+            echo "Fondi insufficienti per effettuare il prelievo.";
+        }
+    }
+}
+
+// Utilizzo
+$transazione = new TransazioneBancaria();
+$transazione->effettuaPrelievo(500); // Output: Prelievo di 500 effettuato con successo. Saldo rimanente: 500
+
+```
+
+Questo esempio simula il processo di gestione di una transazione bancaria. La classe TransazioneBancaria permette di effettuare prelievi dal saldo disponibile.
+La logica di business qui riguarda la gestione delle operazioni bancarie, inclusa la verifica dei fondi disponibili e l'aggiornamento del saldo dopo il prelievo.
+In tutti e tre gli esempi, la logica di business è chiaramente isolata all'interno delle rispettive classi. Questo favorisce la modularità del codice e lo rende più manutenibile e comprensibile. Inoltre, la separazione delle responsabilità facilita l'estensione e il riutilizzo del codice.
+
+
+
+### Calcolo di uno sconto
+
+```php
+class Sconto {
+    public function calcolaSconto($importoTotale, $percentualeSconto) {
+        $scontoApplicato = $importoTotale * ($percentualeSconto / 100);
+        return $scontoApplicato;
+    }
+}
+
+// Utilizzo
+$sconto = new Sconto();
+$importoTotale = 100;
+$percentualeSconto = 10;
+echo "Sconto applicato: $" . $sconto->calcolaSconto($importoTotale, $percentualeSconto);
+
+```
+
+### Calcolo punteggio medio degli studenti
+
+```php
+
+class CalcolaPunteggio {
+    public function calcolaPunteggioMedio($punteggi) {
+        $totalePunteggi = array_sum($punteggi);
+        $numeroPunteggi = count($punteggi);
+        return $totalePunteggi / $numeroPunteggi;
+    }
+}
+
+// Utilizzo
+$calcolo = new CalcolaPunteggio();
+$punteggi = [80, 90, 75, 85];
+echo "Il punteggio medio degli studenti è: " . $calcolo->calcolaPunteggioMedio($punteggi);
+
+```
+
+ Verifica idoneita
+
+```php
+ class VerificaIdoneita {
+    public function verificaCandidato($esperienzaAnni, $skillRichiesti) {
+        if ($esperienzaAnni >= 2 && in_array('PHP', $skillRichiesti)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+// Utilizzo
+$idoneita = new VerificaIdoneita();
+$esperienzaAnni = 3;
+$skillRichiesti = ['PHP', 'MySQL', 'HTML'];
+if ($idoneita->verificaCandidato($esperienzaAnni, $skillRichiesti)) {
+    echo "Il candidato è idoneo per il lavoro.";
+} else {
+    echo "Il candidato non è idoneo per il lavoro.";
+}
+
+```
